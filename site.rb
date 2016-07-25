@@ -3,22 +3,19 @@ require "bundler"
 RACK_ENV = (ENV['RACK_ENV'] || :development).to_sym
 Bundler.require(:default, RACK_ENV)
 
-require "rss"
-require "set"
 require "logger"
 
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each {|file| require file }
 
-class RingClub < Sinatra::Base
+class SquirrelSupply < Sinatra::Base
   register Sinatra::ActiveRecordExtension
-  register ScssInitializer
   use Rack::Deflater
 
   layout :main
   configure do
     connections = {
-      :development => "postgres://localhost/ringclub",
-      :test => "postgres://postgres@localhost/ringclub_test",
+      :development => "postgres://localhost/squirrel",
+      :test => "postgres://postgres@localhost/squirrel_test",
       :production => ENV['DATABASE_URL']
     }
 
@@ -48,6 +45,6 @@ class RingClub < Sinatra::Base
   end
 
   get "/" do
-    erb :index
+    "hi"
   end
 end
