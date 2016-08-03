@@ -45,6 +45,6 @@ class SquirrelSupply < Sinatra::Base
   end
 
   get "/" do
-    "hi"
+    erb :login, layout: "layouts/main".to_sym
   end
 end
