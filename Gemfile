@@ -3,6 +3,7 @@ source "https://rubygems.org"
 ruby "2.3.0"
 
 gem "activerecord", :require => "active_record"
+gem "bcrypt"
 gem "chronic"
 gem "erubis", "~> 2.7"
 gem "oj"
