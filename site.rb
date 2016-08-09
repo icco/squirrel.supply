@@ -45,6 +45,20 @@ class SquirrelSupply < Sinatra::Base
   end
 
   get "/" do
-    erb :login, layout: "layouts/main".to_sym
+    if session[:auth]
+      erb :home, layout: "layouts/main".to_sym
+    else
+      erb :login, layout: "layouts/main".to_sym
+    end
+  end
+
+  post "/login" do
+    if Auth.check(params["pass"])
+      session[:auth] = true
+    else
+      session[:auth] = nil
+    end
+
+    redirect "/"
   end
 end
