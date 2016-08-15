@@ -15,8 +15,13 @@ GEM
     addressable (2.4.0)
     arel (7.1.1)
     ast (2.3.0)
+    autoparse (0.3.3)
+      addressable (>= 2.3.1)
+      extlib (>= 0.9.15)
+      multi_json (>= 1.0.0)
     backports (3.6.8)
     bcrypt (3.1.11)
+    builder (3.2.2)
     chronic (0.10.2)
     concurrent-ruby (1.0.2)
     daemons (1.2.4)
@@ -25,11 +30,27 @@ GEM
       ffi (>= 1.3.0)
     eventmachine (1.2.0.1)
     excon (0.51.0)
+    extlib (0.9.16)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.10.0)
       faraday (>= 0.7.4, < 0.10)
     ffi (1.9.14)
+    fog-core (1.42.0)
+      builder
+      excon (~> 0.49)
+      formatador (~> 0.2)
+    fog-google (0.3.2)
+      fog-core
+      fog-json
+      fog-xml
+    fog-json (1.0.2)
+      fog-core (~> 1.0)
+      multi_json (~> 1.10)
+    fog-xml (0.1.2)
+      fog-core
+      nokogiri (~> 1.5, >= 1.5.11)
+    formatador (0.2.5)
     gh (0.14.0)
       addressable
       backports
@@ -37,6 +58,25 @@ GEM
       multi_json (~> 1.0)
       net-http-persistent (>= 2.7)
       net-http-pipeline
+    google-api-client (0.8.6)
+      activesupport (>= 3.2)
+      addressable (~> 2.3)
+      autoparse (~> 0.3)
+      extlib (~> 0.9)
+      faraday (~> 0.9)
+      googleauth (~> 0.3)
+      launchy (~> 2.4)
+      multi_json (~> 1.10)
+      retriable (~> 1.4)
+      signet (~> 0.6)
+    googleauth (0.5.1)
+      faraday (~> 0.9)
+      jwt (~> 1.4)
+      logging (~> 2.0)
+      memoist (~> 0.12)
+      multi_json (~> 1.11)
+      os (~> 0.9)
+      signet (~> 0.7)
     heroku (3.43.9)
       heroku-api (= 0.4.2)
       launchy (= 2.4.3)
@@ -52,9 +92,16 @@ GEM
     highline (1.7.8)
     i18n (0.7.0)
     json (1.8.3)
+    jwt (1.5.4)
     launchy (2.4.3)
       addressable (~> 2.3)
+    little-plugger (1.1.4)
+    logging (2.1.0)
+      little-plugger (~> 1.1)
+      multi_json (~> 1.10)
+    memoist (0.14.0)
     mime-types (1.25.1)
+    mini_portile2 (2.1.0)
     minitest (5.9.0)
     multi_json (1.11.2)
     multipart-post (2.0.0)
@@ -64,11 +111,16 @@ GEM
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
     netrc (0.10.3)
+    nokogiri (1.6.8)
+      mini_portile2 (~> 2.1.0)
+      pkg-config (~> 1.1.7)
     oj (2.17.2)
     oj_mimic_json (1.0.1)
+    os (0.9.6)
     parser (2.3.1.2)
       ast (~> 2.2)
     pg (0.18.4)
+    pkg-config (1.1.7)
     powerpack (0.1.1)
     pusher-client (0.6.2)
       json
@@ -83,6 +135,7 @@ GEM
     rest-client (1.6.8)
       mime-types (~> 1.16)
       rdoc (>= 2.4.2)
+    retriable (1.4.1)
     rubocop (0.42.0)
       parser (>= 2.3.1.1, < 3.0)
       powerpack (~> 0.1)
@@ -93,6 +146,11 @@ GEM
     rubyzip (1.1.7)
     shotgun (0.9.1)
       rack (>= 1.0)
+    signet (0.7.3)
+      addressable (~> 2.3)
+      faraday (~> 0.9)
+      jwt (~> 1.5)
+      multi_json (~> 1.10)
     sinatra (1.4.7)
       rack (~> 1.5)
       rack-protection (~> 1.4)
@@ -127,11 +185,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord
+  activerecord (~> 5.0)
   bcrypt
   bundler
   chronic
   erubis (~> 2.7)
+  fog-google
+  google-api-client (~> 0.8.6)
   heroku
   oj
   oj_mimic_json
