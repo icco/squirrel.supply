@@ -66,7 +66,7 @@ class SquirrelSupply < Sinatra::Base
   post '/upload' do
     tempfile = params[:file][:tempfile] 
     filename = params[:file][:filename] 
-    FileUtils.cp(tempfile.path, "public/uploads/#{filename}")
+    FileUtils.cp(tempfile.path, "/tmp/#{filename}")
 
     redirect "/"
   end
