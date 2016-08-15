@@ -2,3 +2,9 @@
   <input name="file" type="file" />
   <input type="submit" value="Upload" />
 </form>
+
+<ul>
+  <% @files.each do |f| %>
+    <li><%= f.key %></li>
+  <% end %>
+</ul>

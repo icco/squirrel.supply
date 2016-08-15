@@ -46,6 +46,9 @@ class SquirrelSupply < Sinatra::Base
 
   get "/" do
     if session[:auth]
+      s = Storage.new
+      @files = s.files
+      p @files
       erb :home, layout: "layouts/main".to_sym
     else
       erb :login, layout: "layouts/main".to_sym
@@ -64,9 +67,13 @@ class SquirrelSupply < Sinatra::Base
 
 
   post '/upload' do
-    tempfile = params[:file][:tempfile] 
-    filename = params[:file][:filename] 
-    FileUtils.cp(tempfile.path, "/tmp/#{filename}")
+    raise "No file uploaded" if params[:file].nil?
+
+    tempfile = params[:file][:tempfile]
+    filename = params[:file][:filename]
+
+    s = Storage.new
+    s.upload filename, tempfile.read
 
     redirect "/"
   end
